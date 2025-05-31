@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yusuf Nana | Data Analyst</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--light);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 60px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 1.5s ease-in;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: fadeIn 2s ease-in;
+        }
+        
+        .btn:hover {
+            background-color: #27ae60;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* About Section */
+        #about {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 0.5rem auto;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .profile-img {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .profile-img img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .profile-img img:hover {
+            transform: scale(1.03);
+        }
+        
+        .about-text {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .skill-tag {
+            background-color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Portfolio Section */
+        #portfolio {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+        }
+        
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .project-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-tag {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .project-link {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+        
+        /* Case Study Section */
+        .case-study {
+            margin-top: 5rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+            overflow: hidden;
+        }
+        
+        .case-study h3 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .insight-card {
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-left: 5px solid var(--primary);
+            border-radius: 5px;
+        }
+        
+        .insight-card strong {
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+        
+        .visualization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .visualization {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        
+        .visualization img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        /* Contact Section */
+        #contact {
+            padding: 5rem 0;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .contact-links a {
+            color: var(--dark);
+            font-size: 1.8rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+        
+        .contact-links a:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .skills {
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Yusuf Nana</div>
+                <div class="nav-links" id="navLinks">
+                    <a href="#about">About</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Data-Driven Insights for Business Growth</h1>
+            <p>Transforming raw data into actionable strategies that drive results</p>
+            <a href="#portfolio" class="btn">View My Work</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="profile-img">
+                    <img src="https://res.cloudinary.com/dv4ouxatx/image/upload/v1748725233/WhatsApp_Image_2024-02-07_at_14.35.02_bepnjf.jpg" alt="Yusuf Nana">
+                </div>
+                <div class="about-text">
+                    <h3>Hi, I'm Yusuf Nana</h3>
+                    <p>I'm a passionate data analyst with expertise in transforming complex datasets into clear, actionable insights. With a strong background in business intelligence and statistical analysis, I help organizations make data-driven decisions that drive growth and efficiency.</p>
+                    <p>My approach combines technical skills with business acumen, ensuring that my analyses always lead to practical recommendations that stakeholders can implement.</p>
+                    <div class="skills">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">R</span>
+                        <span class="skill-tag">BigQuery</span>
+                        <span class="skill-tag">Data Visualization</span>
+                        <span class="skill-tag">Statistical Analysis</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Spreadsheet</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1476&q=80" alt="Cyclistic Bike Share">
+                    </div>
+                    <div class="project-info">
+                        <h3>Cyclistic Bike-Share Analysis</h3>
+                        <p>Analyzed rider behavior patterns to develop conversion strategies from casual to annual members.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Power BI</span>
+                            <span class="project-tag">BigQuery</span>
+                            <span class="project-tag">Data Visualization</span>
+                        </div>
+                        <a href="#cyclistic-case-study" class="project-link">View Case Study →</a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Retail Sales Dashboard">
+                    </div>
+                    <div class="project-info">
+                        <h3>Retail Sales Performance Dashboard</h3>
+                        <p>Created interactive dashboards to track KPIs and identify sales opportunities across regions.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Tableau</span>
+                            <span class="project-tag">SQL</span>
+                            <span class="project-tag">DAX</span>
+                        </div>
+                        <a href="#" class="project-link">Coming Soon →</a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Customer Segmentation">
+                    </div>
+                    <div class="project-info">
+                        <h3>Customer Segmentation Analysis</h3>
+                        <p>Used clustering algorithms to identify distinct customer groups for targeted marketing.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Machine Learning</span>
+                            <span class="project-tag">Pandas</span>
+                        </div>
+                        <a href="#" class="project-link">Coming Soon →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cyclistic Case Study -->
+            <div class="case-study" id="cyclistic-case-study">
+                <h3>Cyclistic Bike-Share: Detailed Case Study</h3>
+                <p><strong>Business Objective:</strong> Understand differences between casual riders and annual members to design conversion strategies.</p>
+                
+                <h4>Methodology</h4>
+                <ul>
+                    <li>Analyzed 6 months of ride data (5M+ records)</li>
+                    <li>Cleaned and transformed data using BigQuery</li>
+                    <li>Created interactive dashboards in Power BI</li>
+                    <li>Developed strategic recommendations</li>
+                </ul>
+                
+                <h3>Key Insights</h3>
+                 <div class="project-img">
+                        <img src="https://res.cloudinary.com/dv4ouxatx/image/upload/v1748726124/Screenshot_129_cropped_edit_pu00b9.png" alt="Retail Sales Dashboard">
+                    </div>
+                <div class="insight-grid">
+                    <div class="insight-card">
+                        <strong>Usage Patterns</strong>
+                        <p>Casual riders take longer rides (~18 min) primarily on weekends, while members ride more frequently but shorter trips (~10 min) on weekdays.</p>
+                    </div>
+                    <div class="insight-card">
+                        <strong>Peak Times</strong>
+                        <p>Members show clear commute patterns (7-9AM, 5-7PM), while casual riders peak midday and weekends.</p>
+                    </div>
+                    <div class="insight-card">
+                        <strong>Bike Preferences</strong>
+                        <p>Casual riders prefer electric/docked bikes (58%) compared to members who favor classic bikes (72%).</p>
+                    </div>
+                </div>
+                
+                <h4>Data Visualizations</h4>
+                <div class="visualization-grid">
+                    <div class="visualization">
+                        <img src="https://via.placeholder.com/600x400/2ecc71/ffffff?text=Rides+by+User+Type" alt="Rides by User Type">
+                        <p>Total rides by user type</p>
+                    </div>
+                    <div class="visualization">
+                        <img src="https://via.placeholder.com/600x400/3498db/ffffff?text=Usage+by+Day" alt="Usage by Day">
+                        <p>Usage patterns by day of week</p>
+                    </div>
+                    <div class="visualization">
+                        <img src="https://via.placeholder.com/600x400/e74c3c/ffffff?text=Hourly+Usage" alt="Hourly Usage">
+                        <p>Hourly usage patterns</p>
+                    </div>
+                </div>
+                
+                <h4>Strategic Recommendations</h4>
+                <ol>
+                    <li><strong>Weekend membership trials</strong> create weekend and leisure-based promotions targeting casual riders.</li>
+                    <li><strong>Commuter incentives</strong> promote short, efficient weekday rides to encourage commuting members.</li>
+                    <li><strong>Station-based promotions</strong> run station-based ads in top casual rider locations.</li>
+                    <li><strong>Bike-type specific offers</strong> offer conversion incentives(e.g free trial membership).</li>
+                </ol>
+                
+                <h4>Tools Used</h4>
+                <div class="skills">
+                    <span class="skill-tag">BigQuery</span>
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">DAX</span>
+                    <span class="skill-tag">Excel</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <p>Interested in working together or learning more about my work?</p>
+                <a href="mailto:Aishatn799@gmail.com" class="btn">Email Me</a>
+                <div class="contact-links">
+                    <a href="https://www.linkedin.com/in/nana-aisha-yusuf-94337534b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BcFavUcCzTLiMqEdSfaE0OQ%3D%3D"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/Datagirl98-hub"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://drive.google.com/file/d/1npDrNTMVf3Lt39zngI8Iz3qz-Pg2JO5y/view?usp=sharing"><i class="fas fa-file-pdf"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Yusuf Nana. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
